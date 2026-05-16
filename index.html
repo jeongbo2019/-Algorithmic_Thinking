@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비버 챌린지 난이도별 알고리즘 평가 프로그램</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bebras-app">
+        <header class="app-header">
+            <h1>🦫 비버 알고리즘 챌린지 ⚙️</h1>
+            <p class="subtitle">문제를 선택하고 절차적 사고력을 발휘해 보세요!</p>
+            
+            <div class="tab-container">
+                <button class="tab-btn active" data-level="easy">🟢 하 (이상한 동전)</button>
+                <button class="tab-btn" data-level="medium">🟡 중 (사과 포장하기)</button>
+                <button class="tab-btn" data-level="hard">🔴 상 (볼트와 너트)</button>
+            </div>
+        </header>
+
+        <main class="quiz-card">
+            <div class="card-header">
+                <span id="quiz-difficulty-badge" class="badge">난이도</span>
+                <h2 id="quiz-title">문제 제목</h2>
+            </div>
+
+            <div class="story-box">
+                <p id="quiz-story-text">스토리 내용이 여기에 들어갑니다.</p>
+            </div>
+
+            <div id="interactive-zone" class="interactive-zone">
+                </div>
+
+            <div class="question-box">
+                <p id="quiz-question-text">질문 내용</p>
+            </div>
+
+            <div id="options-container" class="options-container">
+                </div>
+
+            <div class="action-zone">
+                <button id="submit-answer-btn">정답 확인 및 피드백 보기</button>
+            </div>
+        </main>
+
+        <section id="feedback-panel" class="feedback-panel hidden">
+            <div class="feedback-header">
+                <span id="feedback-icon"></span>
+                <span id="feedback-title">결과 타이틀</span>
+            </div>
+            <div id="feedback-content" class="feedback-content">
+                </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
