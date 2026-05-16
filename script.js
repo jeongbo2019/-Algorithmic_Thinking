@@ -222,16 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 교사용 모드 토글 감지 리스너
+    // 교사용 모드 토글 감지 리스너 (비밀번호 "7777" 연동 보완)
     teacherCheckbox.addEventListener('change', () => {
         if (teacherCheckbox.checked) {
-            teacherDashboard.classList.remove('hidden');
-            submitBtn.innerText = "정답 확인 및 피드백 보기";
+            // 토글 스위치를 켤 때 프롬프트 띄우기
+            const password = prompt("교사용 모드 진입을 위한 비밀번호 4자리를 입력하세요.🔑");
+            if (password === "7777") {
+                teacherDashboard.classList.remove('hidden');
+                submitBtn.innerText = "정답 확인 및 피드백 보기";
+            } else {
+                alert("❌ 비밀번호가 틀렸습니다. 교사용 인증 실패!");
+                teacherCheckbox.checked = false; // 강제로 토글 스위치를 다시 오프 상태로 변경
+                teacherDashboard.classList.add('hidden');
+                submitBtn.innerText = "정답 제출하기";
+            }
         } else {
+            // 토글 스위치를 끌 때는 묻지 않고 즉시 해제
             teacherDashboard.classList.add('hidden');
             submitBtn.innerText = "정답 제출하기";
         }
-        // 모드 전환 시 기존 피드백은 깔끔하게 숨김
+        // 모드 전환 시 기존 피드백 패널은 리셋
         feedbackPanel.classList.add('hidden');
     });
 
@@ -248,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackPanel.classList.remove('hidden', 'correct', 'incorrect', 'student-mode');
 
         if (!isTeacherMode) {
-            // [업데이트] 학생 모드: 정답 유출을 막기 위해 단순히 제출되었음만 표기
+            // 학생 모드: 정답 유출을 막기 위해 단순히 제출되었음만 표기
             feedbackPanel.classList.add('student-mode');
             fbIcon.innerText = "📝";
             fbTitle.innerText = "답안 제출 완료!";
