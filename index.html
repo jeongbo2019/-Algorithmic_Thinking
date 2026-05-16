@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비버 챌린지 난이도별 알고리즘 평가 프로그램</title>
+    <title>비버 챌린지 알고리즘 종합 평가 프로그램</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="bebras-app">
         <header class="app-header">
-            <h1>🦫 비버 알고리즘 챌린지 ⚙️</h1>
-            <p class="subtitle">문제를 선택하고 절차적 사고력을 발휘해 보세요!</p>
+            <div class="header-top">
+                <h1>🦫 비버 알고리즘 챌린지</h1>
+                <div class="teacher-toggle-wrapper">
+                    <label class="switch-label" for="teacher-mode-checkbox">교사용 모드 🔑</label>
+                    <label class="switch">
+                        <input type="checkbox" id="teacher-mode-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <p class="subtitle">체험하고 해결하며 알고리즘적 사고력을 키워보세요.</p>
             
             <div class="tab-container">
                 <button class="tab-btn active" data-level="easy">🟢 하 (이상한 동전)</button>
@@ -20,18 +29,44 @@
             </div>
         </header>
 
+        <section id="teacher-dashboard" class="teacher-dashboard hidden">
+            <h3>👨‍🏫 교사용 수업 안내 및 정답 시트</h3>
+            <div class="teacher-grid">
+                <div class="teacher-card">
+                    <span class="t-badge b-easy">하 난이도</span>
+                    <p><strong>정답:</strong> 1번 (27 + 3 - 9 = 21)</p>
+                    <small><strong>핵심 개념:</strong> 균형 삼진법. 컴퓨터 과학에서 음수/양수를 표현하는 원리와 연결됩니다.</small>
+                </div>
+                <div class="teacher-card">
+                    <span class="t-badge b-medium">중 난이도</span>
+                    <p><strong>정답:</strong> 2번 [1, 2, 4, 8, 16]</p>
+                    <small><strong>핵심 개념:</strong> 이진법과 비트 가중치. 최소한의 개수로 모든 수를 표현하는 이진수 저장 구조 학습.</small>
+                </div>
+                <div class="teacher-card">
+                    <span class="t-badge b-hard">상 난이도</span>
+                    <p><strong>정답:</strong> 4번 (N-B-N-N-B-N-N-B-B-B)</p>
+                    <small><strong>핵심 개념:</strong> 스택(Stack) 구조 및 문법 파싱. 괄호 쌍 체크 알고리즘의 기초가 됩니다.</small>
+                </div>
+            </div>
+            <div class="teacher-tip">
+                📌 <strong>수업 팁:</strong> 학생들이 문제를 풀기 전 중간에 마련된 '실험실 구역'을 직접 클릭하고 조작해 보면서 수의 규칙성과 데이터 구조의 원리를 스스로 발견(발견학습)하도록 유도해 주세요.
+            </div>
+        </section>
+
         <main class="quiz-card">
             <div class="card-header">
                 <span id="quiz-difficulty-badge" class="badge">난이도</span>
                 <h2 id="quiz-title">문제 제목</h2>
             </div>
 
+            <div id="quiz-image-zone" class="quiz-image-zone">
+                </div>
+
             <div class="story-box">
                 <p id="quiz-story-text">스토리 내용이 여기에 들어갑니다.</p>
             </div>
 
-            <div id="interactive-zone" class="interactive-zone">
-                </div>
+            <div id="interactive-zone" class="interactive-zone"></div>
 
             <div class="question-box">
                 <p id="quiz-question-text">질문 내용</p>
@@ -50,8 +85,7 @@
                 <span id="feedback-icon"></span>
                 <span id="feedback-title">결과 타이틀</span>
             </div>
-            <div id="feedback-content" class="feedback-content">
-                </div>
+            <div id="feedback-content" class="feedback-content"></div>
         </section>
     </div>
 
