@@ -4,7 +4,6 @@ const bebrasDatabase = {
         title: "이상한 화폐 계산법 🪙",
         difficulty: "하 (Easy) - 정보의 표현",
         color: "#10b981",
-        // 맞춤형 그래픽 디자인 (동전과 저울 컨셉의 직관적 일러스트)
         svg: `
             <svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
                 <rect x="10" y="90" width="220" height="15" rx="5" fill="#64748b"/>
@@ -45,7 +44,6 @@ const bebrasDatabase = {
         title: "스마트 사과 포장 창고 🍎",
         difficulty: "중 (Medium) - 데이터 표현",
         color: "#f59e0b",
-        // 맞춤형 그래픽 디자인 (비트 가중치 상자 일러스트)
         svg: `
             <svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
                 <g fill="#b45309" stroke="#78350f" stroke-width="2">
@@ -93,7 +91,6 @@ const bebrasDatabase = {
         title: "자동 조립 기계의 부품 흐름 ⚙️",
         difficulty: "상 (Hard) - 자료구조와 알고리즘",
         color: "#8b5cf6",
-        // 맞춤형 그래픽 디자인 (컨베이어 벨트와 공장 라인 일러스트)
         svg: `
             <svg width="240" height="120" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg">
                 <line x1="20" y1="70" x2="220" y2="70" stroke="#475569" stroke-width="4" stroke-dasharray="8,4"/>
@@ -159,7 +156,7 @@ function renderBebrasQuiz(levelKey) {
     const interactiveZone = document.getElementById('interactive-zone');
     interactiveZone.innerHTML = data.customVisual;
 
-    // [특수 트리거] 중 난이도 사과상자 계산기 초기화
+    // 중 난이도 사과상자 계산기 초기화
     if (levelKey === "medium") {
         initAppleBoxes();
     }
@@ -207,8 +204,16 @@ function initAppleBoxes() {
 
 // 5. 초기 이벤트 처리기 바인딩
 document.addEventListener('DOMContentLoaded', () => {
-    // 탭 메뉴 리스너
     const tabs = document.querySelectorAll('.tab-btn');
+    const teacherCheckbox = document.getElementById('teacher-mode-checkbox');
+    const teacherDashboard = document.getElementById('teacher-dashboard');
+    const submitBtn = document.getElementById('submit-answer-btn');
+    const feedbackPanel = document.getElementById('feedback-panel');
+    const fbIcon = document.getElementById('feedback-icon');
+    const fbTitle = document.getElementById('feedback-title');
+    const fbContent = document.getElementById('feedback-content');
+
+    // 탭 메뉴 리스너
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
@@ -218,24 +223,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 교사용 모드 토글 감지 리스너
-    const teacherCheckbox = document.getElementById('teacher-mode-checkbox');
-    const teacherDashboard = document.getElementById('teacher-dashboard');
-    
     teacherCheckbox.addEventListener('change', () => {
         if (teacherCheckbox.checked) {
             teacherDashboard.classList.remove('hidden');
+            submitBtn.innerText = "정답 확인 및 피드백 보기";
         } else {
             teacherDashboard.classList.add('hidden');
+            submitBtn.innerText = "정답 제출하기";
         }
+        // 모드 전환 시 기존 피드백은 깔끔하게 숨김
+        feedbackPanel.classList.add('hidden');
     });
 
-    // 정답 제출 확인 처리 리스너
-    const submitBtn = document.getElementById('submit-answer-btn');
-    const feedbackPanel = document.getElementById('feedback-panel');
-    const fbIcon = document.getElementById('feedback-icon');
-    const fbTitle = document.getElementById('feedback-title');
-    const fbContent = document.getElementById('feedback-content');
-
+    // 정답 제출 및 보안 제어 처리 리스너
     submitBtn.addEventListener('click', () => {
         if (!currentSelectedOption) {
             alert("정답 보기를 먼저 선택해 주세요! 🤔");
@@ -243,20 +243,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const currentData = bebrasDatabase[activeLevel];
-        feedbackPanel.classList.remove('hidden', 'correct', 'incorrect');
+        const isTeacherMode = teacherCheckbox.checked;
 
-        if (currentSelectedOption === currentData.correct) {
-            feedbackPanel.classList.add('correct');
-            fbIcon.innerText = "🎉";
-            fbTitle.innerText = "정답입니다! 정보 과학적 역량이 대단하네요!";
-            fbContent.innerHTML = currentData.explanation;
-        } else {
-            feedbackPanel.classList.add('incorrect');
-            fbIcon.innerText = "❌";
-            fbTitle.innerText = "아쉽게도 오답입니다. 다시 한번 도전해 볼까요?";
+        feedbackPanel.classList.remove('hidden', 'correct', 'incorrect', 'student-mode');
+
+        if (!isTeacherMode) {
+            // [업데이트] 학생 모드: 정답 유출을 막기 위해 단순히 제출되었음만 표기
+            feedbackPanel.classList.add('student-mode');
+            fbIcon.innerText = "📝";
+            fbTitle.innerText = "답안 제출 완료!";
             fbContent.innerHTML = `
-                <p style="margin-bottom: 8px;"><strong>💡 힌트 안내:</strong> ${currentData.hint}</p>
+                <p>작성한 답안 <strong>${currentSelectedOption}번</strong>이 성공적으로 저장되었습니다.</p>
+                <p style="margin-top: 8px; font-size: 0.88rem; color: #475569;">
+                    🔒 <strong>보안 안내:</strong> 현재 학생 평가 모드이므로 실시간 정오답 결과는 표시되지 않습니다. 선생님이 수업 중에 <strong>'교사용 모드'</strong>를 켜면 이 자리에 상세 해설판이 열립니다.
+                </p>
             `;
+        } else {
+            // 교사용 모드: 즉시 정오답 유무 판별 및 컴퓨터과학 정교화 피드백 출력
+            if (currentSelectedOption === currentData.correct) {
+                feedbackPanel.classList.add('correct');
+                fbIcon.innerText = "🎉";
+                fbTitle.innerText = "정답입니다! (교사용 상세 피드백 활성화)";
+                fbContent.innerHTML = currentData.explanation;
+            } else {
+                feedbackPanel.classList.add('incorrect');
+                fbIcon.innerText = "❌";
+                fbTitle.innerText = "오답입니다! (교사용 지도 힌트 활성화)";
+                fbContent.innerHTML = `
+                    <p style="margin-bottom: 8px;"><strong>💡 학생 대상 유도 힌트:</strong> ${currentData.hint}</p>
+                    <p style="font-size: 0.85rem; color: #b91c1c; opacity: 0.8;">
+                        * 교사용 모드에서는 오답을 눌러도 다른 힌트 시연이 가능하므로 수업 피드백 시 활용하세요.
+                    </p>
+                `;
+            }
         }
 
         feedbackPanel.scrollIntoView({ behavior: 'smooth' });
