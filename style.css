@@ -141,10 +141,12 @@ input:checked + .slider:before { transform: translateX(18px); }
     display: flex;
     gap: 10px;
     margin-bottom: 12px;
+    flex-wrap: wrap;
 }
 
 .teacher-card {
     flex: 1;
+    min-width: 220px;
     background: white;
     padding: 12px;
     border-radius: 8px;
@@ -222,6 +224,7 @@ input:checked + .slider:before { transform: translateX(18px); }
     gap: 8px;
     justify-content: center;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 .info-item {
@@ -262,6 +265,7 @@ input:checked + .slider:before { transform: translateX(18px); }
     padding: 8px;
     border-radius: 6px;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 /* 질문과 보기 */
@@ -318,6 +322,7 @@ input:checked + .slider:before { transform: translateX(18px); }
     border-radius: 12px;
     padding: 20px;
     line-height: 1.6;
+    margin-top: 20px;
 }
 
 .feedback-panel.correct { background: #ecfdf5; border: 2px solid #a7f3d0; color: #065f46; }
