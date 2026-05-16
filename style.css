@@ -1,0 +1,282 @@
+/* 기본 리셋 스타일 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.bebras-app {
+    max-width: 760px;
+    width: 100%;
+}
+
+/* 헤더 & 탭 메뉴 디자인 */
+.app-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.tab-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    background: #e2e8f0;
+    padding: 6px;
+    border-radius: 30px;
+}
+
+.tab-btn {
+    flex: 1;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    color: #64748b;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: #334155;
+}
+
+.tab-btn.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* 메인 퀴즈 카드 인터페이스 */
+.quiz-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    padding: 30px;
+    margin-bottom: 20px;
+    border-top: 6px solid #3b82f6;
+    transition: border-color 0.3s ease;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+#quiz-title {
+    font-size: 1.4rem;
+    color: #1e293b;
+}
+
+.story-box {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #475569;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #cbd5e1;
+    margin-bottom: 20px;
+}
+
+/* 인터랙티브 시뮬레이션 교구 영역 */
+.interactive-zone {
+    margin-bottom: 20px;
+}
+
+.visual-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.coin-container, .conveyor-container {
+    display: flex;
+    gap: 10px;
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.visual-item {
+    background: white;
+    border: 2px solid #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #334155;
+}
+
+/* 사과 상자 상호작용 도구 */
+.apple-box-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.apple-box-item {
+    flex: 1;
+    background: #fffdeb;
+    border: 2px solid #eab308;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.apple-box-item.checked {
+    background: #fef08a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(234,179,8,0.2);
+}
+
+.live-counter {
+    background: #fef3c7;
+    color: #d97706;
+    text-align: center;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 질문 상자 */
+.question-box {
+    background: #eff6ff;
+    padding: 15px;
+    border-radius: 8px;
+    color: #1e40af;
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+/* 선지 문항 디자인 */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.option-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #334155;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.option-card:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.option-card.selected {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+/* 동작 버튼 */
+#submit-answer-btn {
+    width: 100%;
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#submit-answer-btn:hover {
+    background: #0f172a;
+}
+
+/* 결과 분석 패널 디자인 */
+.feedback-panel {
+    border-radius: 16px;
+    padding: 25px;
+    line-height: 1.7;
+}
+
+.feedback-panel.correct {
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    color: #166534;
+}
+
+.feedback-panel.incorrect {
+    background: #fff5f5;
+    border: 2px solid #feb2b2;
+    color: #9b2c2c;
+}
+
+.feedback-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.feedback-content h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.05rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-bottom: 4px;
+}
+
+.feedback-content ul, .feedback-content ol {
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.hidden {
+    display: none;
+}
