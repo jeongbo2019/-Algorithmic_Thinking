@@ -308,11 +308,12 @@ input:checked + .slider:before { transform: translateX(18px); }
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 #submit-answer-btn:hover { background: #0f172a; }
 
-/* 결과 패널 */
+/* 결과 패널 스타일링 (분기 적용) */
 .feedback-panel {
     border-radius: 12px;
     padding: 20px;
@@ -321,6 +322,8 @@ input:checked + .slider:before { transform: translateX(18px); }
 
 .feedback-panel.correct { background: #ecfdf5; border: 2px solid #a7f3d0; color: #065f46; }
 .feedback-panel.incorrect { background: #fef2f2; border: 2px solid #fca5a5; color: #991b1b; }
+.feedback-panel.student-mode { background: #f8fafc; border: 2px solid #cbd5e1; color: #334155; }
+
 .feedback-header { font-size: 1.15rem; font-weight: bold; margin-bottom: 10px; }
 .feedback-content h4 { margin-top: 12px; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 4px; }
 .feedback-content ul, .feedback-content ol { margin-left: 20px; margin-top: 4px; font-size: 0.9rem; }
